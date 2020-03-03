@@ -1,0 +1,7 @@
+version: '3.7'
+
+services:
+  four-oh-four:
+    image: docker.pkg.github.com/williamjacksn/four-oh-four/four-oh-four
+    build: .
+    init: true

@@ -1,0 +1,20 @@
+<html lang="en">
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>href</th>
+        <th>total</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for href in g.hrefs %}
+        <tr>
+            <td>{{ href.href }}</td>
+            <td>{{ href.total }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>

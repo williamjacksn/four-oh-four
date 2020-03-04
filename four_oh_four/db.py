@@ -2,6 +2,8 @@ import datetime
 import fort
 import four_oh_four.settings
 
+from typing import Dict, List
+
 
 class Database(fort.PostgresDatabase):
     _version: int = None
@@ -11,11 +13,13 @@ class Database(fort.PostgresDatabase):
         self.settings = settings
 
     def add_href(self, href: str):
-        sql = '''
-            insert into hrefs (recorded_at, href) values (now(), %(href)s)
-        '''
+        sql = 'insert into hrefs (recorded_at, href) values (now(), %(href)s)'
         params = {'href': href}
         self.u(sql, params)
+
+    def get_hrefs(self) -> List[Dict]:
+        sql = 'select href, count(*) total from hrefs group by href order by total desc'
+        return self.q(sql)
 
     def add_schema_version(self, schema_version: int):
         self._version = schema_version
@@ -49,8 +53,9 @@ class Database(fort.PostgresDatabase):
 
     def _table_exists(self, table_name: str) -> bool:
         sql = 'select count(*) table_count from information_schema.tables where table_name = %(table_name)s'
-        for record in self.q(sql, {'table_name': table_name}):
-            if record['table_count'] == 0:
+        params = {'table_name': table_name}
+        for r in self.q(sql, params):
+            if r['table_count'] == 0:
                 return False
         return True
 

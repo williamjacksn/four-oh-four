@@ -16,8 +16,11 @@ app.wsgi_app = werkzeug.middleware.proxy_fix.ProxyFix(app.wsgi_app, x_for=1, x_p
 def index():
     if flask.request.method == 'POST' and 'href' in flask.request.values:
         href = flask.request.values.get('href')
+        app.logger.info(f'adding href: {href}')
         four_oh_four.db.Database(settings).add_href(href)
-        app.logger.info(f'href: {href}')
+    if flask.request.method == 'GET':
+        flask.g.hrefs = four_oh_four.db.Database(settings).get_hrefs()
+        return flask.render_template('index.html')
     return 'OK'
 
 

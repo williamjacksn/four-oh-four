@@ -24,6 +24,11 @@ def index():
     return 'OK'
 
 
+@app.route('/test')
+def test():
+    return flask.render_template('test.html')
+
+
 def main():
     logging.basicConfig(format=settings.log_format, level='DEBUG', stream=sys.stdout)
     app.logger.debug(f'four-oh-four {settings.version}')

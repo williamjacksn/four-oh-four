@@ -1,4 +1,5 @@
 import flask
+import four_oh_four.db
 import four_oh_four.settings
 import logging
 import sys
@@ -25,5 +26,8 @@ def main():
     if not settings.log_level == 'DEBUG':
         app.logger.debug(f'Changing log level to {settings.log_level}')
     logging.getLogger().setLevel(settings.log_level)
+
+    db = four_oh_four.db.Database(settings)
+    db.migrate()
 
     waitress.serve(app, ident=None, threads=settings.web_server_threads)

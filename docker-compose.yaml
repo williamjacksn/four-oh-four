@@ -9,7 +9,7 @@ services:
       DB: postgres://postgres:postgres@postgres/postgres
 
   postgres:
-    image: postgres:11.6-alpine
+    image: postgres:11.7-alpine
     environment:
       POSTGRES_PASSWORD: postgres
       PGDATA: /var/lib/postgresql/data/11

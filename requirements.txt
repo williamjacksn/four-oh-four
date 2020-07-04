@@ -1,3 +1,4 @@
+--extra-index-url https://alpine-wheels.github.io/index/
 Flask==1.1.1
 Werkzeug==1.0.0
 fort==0.0.7

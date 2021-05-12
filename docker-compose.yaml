@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   four-oh-four:
+    build: .
     image: ghcr.io/williamjacksn/four-oh-four
     init: true
     environment:

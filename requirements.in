@@ -1,0 +1,4 @@
+Flask
+fort
+psycopg2
+waitress

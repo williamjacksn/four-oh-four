@@ -1,6 +1,6 @@
 --extra-index-url https://alpine-wheels.github.io/index
 
-Flask
+flask
 fort
 psycopg2
 waitress

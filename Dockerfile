@@ -1,4 +1,4 @@
-FROM python:3.12.3-alpine3.19
+FROM python:3.12-alpine
 
 COPY requirements.txt /four-oh-four/requirements.txt
 

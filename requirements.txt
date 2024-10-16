@@ -22,7 +22,7 @@ markupsafe==3.0.1
     # via
     #   jinja2
     #   werkzeug
-psycopg2==2.9.9
+psycopg2==2.9.10
     # via -r requirements.in
 waitress==3.0.0
     # via -r requirements.in

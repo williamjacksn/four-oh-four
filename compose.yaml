@@ -6,6 +6,15 @@ services:
     environment:
       DB: postgres://postgres:postgres@postgres/postgres
 
+  pip-compile:
+    entrypoint:
+      - /home/python/venv/bin/pip-compile
+    image: ghcr.io/williamjacksn/pip-tools:py3.12
+    init: true
+    volumes:
+      - ./:/home/python/four-oh-four
+    working_dir: /home/python/four-oh-four
+
   postgres:
     image: postgres:11
     environment:

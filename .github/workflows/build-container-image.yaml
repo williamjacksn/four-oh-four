@@ -65,8 +65,8 @@ jobs:
           SSH_HOST: ${{ secrets.ssh_host }}
           SSH_PRIVATE_KEY: ${{ secrets.ssh_private_key }}
 
-      - name: Pull latest container image
-        run: ssh ssh://${{ secrets.ssh_user }}@${{ secrets.ssh_host }}:53185 /usr/bin/docker compose --file /home/${{ secrets.ssh_user }}/syncthing/coruscant/compose.yaml pull four-oh-four
-
-      - name: Restart app
-        run: ssh ssh://${{ secrets.ssh_user }}@${{ secrets.ssh_host }}:53185 /usr/bin/docker compose --file /home/${{ secrets.ssh_user }}/syncthing/coruscant/compose.yaml up --detach four-oh-four
+      - name: Deploy the app
+        run: sh ci/ssh-deploy.sh
+        env:
+          SSH_HOST: ${{ secrets.ssh_host }}
+          SSH_USER: ${{ secrets.ssh_user }}

@@ -11,9 +11,10 @@ def update(ecosystem: str) -> dict:
     }
 
 
+ecosystems = ["docker", "github-actions", "uv"]
 content = {
     "version": 2,
-    "updates": [update(e) for e in ["docker", "github-actions", "uv"]],
+    "updates": [update(e) for e in ecosystems],
 }
 
 target = pathlib.Path(".github/dependabot.yaml")

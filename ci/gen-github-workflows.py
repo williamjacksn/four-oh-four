@@ -75,5 +75,5 @@ workflow = {
     },
 }
 
-target = pathlib.Path(".github/workflows/build-container-image.yaml")
+target = pathlib.Path(".github/workflows/build-and-deploy.yaml")
 target.write_text(json.dumps(workflow, indent=2, sort_keys=True))

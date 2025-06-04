@@ -59,14 +59,9 @@ jobs:
       - name: Check out the repository
         uses: actions/checkout@v4
 
-      - name: Configure SSH key
-        run: sh ci/configure-ssh-key.sh
-        env:
-          SSH_HOST: ${{ secrets.ssh_host }}
-          SSH_PRIVATE_KEY: ${{ secrets.ssh_private_key }}
-
       - name: Deploy the app
         run: sh ci/ssh-deploy.sh
         env:
           SSH_HOST: ${{ secrets.ssh_host }}
+          SSH_PRIVATE_KEY: ${{ secrets.ssh_private_key }}
           SSH_USER: ${{ secrets.ssh_user }}

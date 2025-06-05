@@ -9,31 +9,33 @@ import werkzeug.middleware.proxy_fix
 settings = four_oh_four.settings.Settings()
 
 app = flask.Flask(__name__)
-app.wsgi_app = werkzeug.middleware.proxy_fix.ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_port=1)
+app.wsgi_app = werkzeug.middleware.proxy_fix.ProxyFix(
+    app.wsgi_app, x_for=1, x_proto=1, x_port=1
+)
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route("/", methods=["GET", "POST"])
 def index():
-    if flask.request.method == 'POST' and 'href' in flask.request.values:
-        href = flask.request.values.get('href')
-        app.logger.info(f'adding href: {href}')
+    if flask.request.method == "POST" and "href" in flask.request.values:
+        href = flask.request.values.get("href")
+        app.logger.info(f"adding href: {href}")
         four_oh_four.db.Database(settings).add_href(href)
-    if flask.request.method == 'GET':
+    if flask.request.method == "GET":
         flask.g.hrefs = four_oh_four.db.Database(settings).get_hrefs()
-        return flask.render_template('index.html')
-    return 'OK'
+        return flask.render_template("index.html")
+    return "OK"
 
 
-@app.route('/test')
+@app.route("/test")
 def test():
-    return flask.render_template('test.html')
+    return flask.render_template("test.html")
 
 
 def main():
-    logging.basicConfig(format=settings.log_format, level='DEBUG', stream=sys.stdout)
-    app.logger.debug(f'four-oh-four {settings.version}')
-    if not settings.log_level == 'DEBUG':
-        app.logger.debug(f'Changing log level to {settings.log_level}')
+    logging.basicConfig(format=settings.log_format, level="DEBUG", stream=sys.stdout)
+    app.logger.debug(f"four-oh-four {settings.version}")
+    if not settings.log_level == "DEBUG":
+        app.logger.debug(f"Changing log level to {settings.log_level}")
     logging.getLogger().setLevel(settings.log_level)
 
     db = four_oh_four.db.Database(settings)

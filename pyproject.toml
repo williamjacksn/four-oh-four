@@ -10,3 +10,8 @@ dependencies = [
     "psycopg2-binary>=2.9.10",
     "waitress>=3.0.2",
 ]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.14.8",
+]
